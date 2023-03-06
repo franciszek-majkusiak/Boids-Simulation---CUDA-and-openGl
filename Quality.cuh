@@ -187,6 +187,7 @@ public:
 			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			// -------------------------------------------------------------------------------
 			glfwSwapBuffers(window);
+			glfwSwapInterval(0);
 			glfwPollEvents();
 		}
 	}

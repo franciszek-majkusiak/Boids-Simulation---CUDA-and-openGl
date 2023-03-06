@@ -152,7 +152,8 @@ public:
 		GLFWmonitor* monitor = monitors[count - 1];
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
-		window = glfwCreateWindow(mode->width, mode->height, "Boids", monitor, NULL);
+		window = glfwCreateWindow(mode->width, mode->height, "Boids", NULL, NULL);
+		glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 		if (window == NULL)
 		{
 			std::cout << "Failed to create GLFW window" << std::endl;
