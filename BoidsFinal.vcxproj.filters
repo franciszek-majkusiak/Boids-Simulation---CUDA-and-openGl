@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{26ce7e3c-7004-457c-a5b9-5c5e5c74679f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{26492821-4be3-4093-9ed7-bb8454d9aea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6c737a7f-2428-43da-8188-9f66704541f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cuda">
+      <UniqueIdentifier>{2c1aedd4-cfdb-41d9-9e7a-5b7e7d948e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup Files">
+      <UniqueIdentifier>{c6e13382-c353-4231-b0b8-53e3a8b944f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Simulations">
+      <UniqueIdentifier>{003afef0-c0b8-4ee5-8a69-24c2e3581aa5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boid3D.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="boid3D.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="cube3D.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="cube3D.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="SimpleTestFlock.setup">
+      <Filter>Setup Files</Filter>
+    </None>
+    <None Include="BigFlock.setup">
+      <Filter>Setup Files</Filter>
+    </None>
+    <None Include="boid3DPerformance.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="boid3DPerformance.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="CPUFlock.setup">
+      <Filter>Setup Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper_math.cuh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.cuh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flock.cuh">
+      <Filter>Cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Flockvec3Arr.cuh">
+      <Filter>Cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Flockvec3ArrFunctions.cuh">
+      <Filter>Cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="mat3.cuh">
+      <Filter>Cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="Quality.cuh">
+      <Filter>Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulation.cuh">
+      <Filter>Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="Performance.cuh">
+      <Filter>Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="CPUSimulation.cuh">
+      <Filter>Simulations</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="Flock.cu">
+      <Filter>Cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="Flockvec3Arr.cu">
+      <Filter>Cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="Flockvec3ArrFunctions.cu">
+      <Filter>Cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="source.cu">
+      <Filter>Cuda</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>

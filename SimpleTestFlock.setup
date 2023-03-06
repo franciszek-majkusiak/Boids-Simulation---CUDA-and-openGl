@@ -1,0 +1,18 @@
+# Pool
+Width: 30.0f
+Height: 30.0f
+Depth: 30.0f
+CellSize: 5.0f
+# Flock
+NumOfBoids: 20000
+AlignmentRadius: 2.0f
+CohesionRadius: 2.0f
+SeparationRadius: 0.4f
+AlignmentForce: 0.5f
+CohesionForce: 0.5f
+SeparationForce: 0.5f
+Length: 0.2f
+Width: 0.1f
+MaxSpeed: 5.0f
+MaxSteer: 2.0f
+Color: 0.0f 1.0f 0.0f
