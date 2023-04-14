@@ -85,7 +85,7 @@
     <CudaCompile Include="Flock.cu" />
     <CudaCompile Include="Flockvec3Arr.cu" />
     <CudaCompile Include="Flockvec3ArrFunctions.cu" />
-    <CudaCompile Include="source.cu" />
+    <CudaCompile Include="main.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
@@ -111,17 +111,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera3D.h" />
-    <ClInclude Include="CPUSimulation.cuh" />
-    <ClInclude Include="Cube.cuh" />
-    <ClInclude Include="Flock.cuh" />
-    <ClInclude Include="Flockvec3Arr.cuh" />
-    <ClInclude Include="Flockvec3ArrFunctions.cuh" />
-    <ClInclude Include="helper_math.cuh" />
-    <ClInclude Include="mat3.cuh" />
-    <ClInclude Include="Performance.cuh" />
-    <ClInclude Include="Quality.cuh" />
+    <ClInclude Include="CPUSimulation.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Flock.h" />
+    <ClInclude Include="Flockvec3Arr.h" />
+    <ClInclude Include="Flockvec3ArrFunctions.h" />
+    <ClInclude Include="helper_math.h" />
+    <ClInclude Include="mat3.h" />
+    <ClInclude Include="Performance.h" />
+    <ClInclude Include="Quality.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Simulation.cuh" />
+    <ClInclude Include="Simulation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

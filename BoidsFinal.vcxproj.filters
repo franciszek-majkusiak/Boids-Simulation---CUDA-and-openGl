@@ -82,37 +82,37 @@
     <ClInclude Include="Camera3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="helper_math.cuh">
+    <ClInclude Include="helper_math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.cuh">
+    <ClInclude Include="Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flock.cuh">
+    <ClInclude Include="Flock.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Flockvec3Arr.cuh">
+    <ClInclude Include="Flockvec3Arr.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Flockvec3ArrFunctions.cuh">
+    <ClInclude Include="Flockvec3ArrFunctions.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="mat3.cuh">
+    <ClInclude Include="mat3.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Quality.cuh">
+    <ClInclude Include="Quality.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="Simulation.cuh">
+    <ClInclude Include="Simulation.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="Performance.cuh">
+    <ClInclude Include="Performance.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="CPUSimulation.cuh">
+    <ClInclude Include="CPUSimulation.h">
       <Filter>Simulations</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,7 +126,7 @@
     <CudaCompile Include="Flockvec3ArrFunctions.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
-    <CudaCompile Include="source.cu">
+    <CudaCompile Include="main.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
   </ItemGroup>

@@ -1,8 +1,8 @@
 # Pool
-Width: 20.0f
-Height: 20.0f
-Depth: 20.0f
-CellSize: 2.0f
+Width: 30.0f
+Height: 30.0f
+Depth: 30.0f
+CellSize: 3.0f
 # Flock1
 NumOfBoids: 100000
 AlignmentRadius: 2.0f

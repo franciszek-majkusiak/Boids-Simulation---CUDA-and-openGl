@@ -17,8 +17,8 @@
 #include "imgui\imgui_impl_opengl3.h"
 
 
-#include "Flockvec3ArrFunctions.cuh"
-#include "Cube.cuh"
+#include "Flockvec3ArrFunctions.h"
+#include "Cube.h"
 
 Camera3D camera;
 static float lastX;
@@ -29,29 +29,23 @@ static float deltaTime;
 class Simulation
 {
 public:
-
 	std::string SimulationString;
-
 
 	Flockvec3Arr flock;
 	FlockProperties flockProperties;
 	Grid grid;
 	PoolProperties poolProperties;
-
 	Shader BoidShader;
 	Shader cubeShader;
-
 	Cube cube;
-
 	GLFWwindow* window;
-
 	bool Settings = false;
 	bool wasReleased = true;
 	bool wasPressed = false;
 
+
 	float* vertices;
 	cudaGraphicsResource* VBO_CUDA;
-
 	unsigned int VAO, VBO, VAO_CUBE, VBO_CUBE;
 
 	ImGuiIO io;
@@ -149,11 +143,11 @@ public:
 		// --------------------
 		int count;
 		GLFWmonitor** monitors = glfwGetMonitors(&count);
-		GLFWmonitor* monitor = monitors[count - 1];
+		GLFWmonitor* monitor = monitors[0];
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
 		window = glfwCreateWindow(mode->width, mode->height, "Boids", NULL, NULL);
-		glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+		//glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 		if (window == NULL)
 		{
 			std::cout << "Failed to create GLFW window" << std::endl;

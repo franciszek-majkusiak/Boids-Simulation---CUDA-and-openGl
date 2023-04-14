@@ -1,4 +1,5 @@
-#include "Simulation.cuh"
+#include "Simulation.h"
+#include <chrono>
 
 class CPUSimulation : Simulation
 {
@@ -84,17 +85,15 @@ public:
 
 			if (!isStopped)
 			{
-				cudaEventRecord(start);
+				auto start = std::chrono::high_resolution_clock::now();
 				StepCPU(flock, flockProperties, poolProperties, deltaTime);
-				cudaEventRecord(stop);
-				cudaEventSynchronize(stop);
-				cudaEventElapsedTime(&UpdateTime, start, stop);
+				auto stop = std::chrono::high_resolution_clock::now();
+				UpdateTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
 				UpdateTime /= 1000.0f;
-				cudaEventRecord(start);
+				start = std::chrono::high_resolution_clock::now();
 				DrawBoidsPerformanceCPU(flock, flockProperties, vertices);
-				cudaEventRecord(stop);
-				cudaEventSynchronize(stop);
-				cudaEventElapsedTime(&CreateVerticesTime, start, stop);
+				CreateVerticesTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+				CreateVerticesTime /= 1000.0f;
 				CreateVerticesTime /= 1000.0f;
 			}
 

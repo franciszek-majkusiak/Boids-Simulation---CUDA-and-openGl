@@ -1,4 +1,4 @@
-#include "Flockvec3Arr.cuh"
+#include "Flockvec3Arr.h"
 #include <algorithm>
 
 

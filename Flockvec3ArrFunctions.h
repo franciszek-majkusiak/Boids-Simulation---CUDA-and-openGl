@@ -1,7 +1,7 @@
 #ifndef FLOCKVEC3ARRFUNC_CUH
 #define FLOCKVEC3ARRFUNC_CUH
 
-#include "Flockvec3Arr.cuh"
+#include "Flockvec3Arr.h"
 #include "thrust/sort.h"
 #include "thrust/device_ptr.h"
 
@@ -9,8 +9,8 @@
 #include <utility>
 #include<math.h>
 #include <algorithm>
-#include "helper_math.cuh"
-#include "mat3.cuh"
+#include "helper_math.h"
+#include "mat3.h"
 
 
 __global__ void FindCellsStartEnd(int* sortedBoidGridPos, int* cellStartIdx, int* cellEndIdx, int numOfBoids);

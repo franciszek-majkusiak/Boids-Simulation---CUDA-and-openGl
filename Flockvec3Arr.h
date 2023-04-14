@@ -2,7 +2,7 @@
 #define FLOCKVEC3ARR_CUH
 #include "device_launch_parameters.h"
 
-#include "Flock.cuh"
+#include "Flock.h"
 
 struct vec3Arr
 {

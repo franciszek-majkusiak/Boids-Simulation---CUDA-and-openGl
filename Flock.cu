@@ -1,4 +1,4 @@
-#include "Flock.cuh"
+#include "Flock.h"
 #include <fstream>
 #include <sstream>
 #include <string>

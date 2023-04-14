@@ -1,4 +1,4 @@
-#include "Flockvec3ArrFunctions.cuh"
+#include "Flockvec3ArrFunctions.h"
 
 
 __global__ void FindCellsStartEnd(int* sortedBoidGridPos, int* cellStartIdx, int* cellEndIdx, int numOfBoids)
