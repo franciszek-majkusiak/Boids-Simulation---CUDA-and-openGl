@@ -1,6 +1,6 @@
-#include "Quality.h"
-#include "Performance.h"
-#include "CPUSimulation.h"
+#include "Simulations/Quality.h"
+#include "Simulations/Performance.h"
+#include "Simulations/CPUSimulation.h"
 
 int main()
 {

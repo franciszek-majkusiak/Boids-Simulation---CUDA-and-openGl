@@ -7,17 +7,15 @@
 #include <string>
 
 #include "cuda_gl_interop.h"
-
-#include "Shader.h"
 #include "Camera3D.h"
-
+#include "Shaders/Shader.h"
 
 #include "imgui\imgui.h"
 #include "imgui\imgui_impl_glfw.h"
 #include "imgui\imgui_impl_opengl3.h"
 
 
-#include "Flockvec3ArrFunctions.h"
+#include "Flocking/Flockvec3ArrFunctions.h"
 #include "Cube.h"
 
 Camera3D camera;

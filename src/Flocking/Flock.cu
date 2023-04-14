@@ -6,6 +6,7 @@
 #include <iostream>
 
 
+
 void Init(Grid& grid, PoolProperties properties)
 {
 	printf("Init Grid\n");
@@ -53,10 +54,11 @@ void split(const std::string& str, std::vector<std::string>& v)
 
 void ReadPropertiesFromSetup(std::string SetupFileName, Grid& grid, FlockProperties& flockProperties, PoolProperties& poolProperties)
 {
-	std::ifstream infile(SetupFileName);
+	std::string relativePath = "src/SetUpFiles/" + SetupFileName;
+	std::ifstream infile(relativePath);
 	if (!infile.is_open())
 	{
-		fprintf(stderr, "Cannot open file\n");
+		fprintf(stderr, "Cannot open file %s\n", relativePath.c_str());
 		exit(EXIT_FAILURE);
 	}
 	std::string line;

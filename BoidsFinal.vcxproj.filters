@@ -21,112 +21,112 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c">
+    <ClCompile Include="src\LibFiles\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui.cpp">
+    <ClCompile Include="src\LibFiles\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_demo.cpp">
+    <ClCompile Include="src\LibFiles\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_draw.cpp">
+    <ClCompile Include="src\LibFiles\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_impl_glfw.cpp">
+    <ClCompile Include="src\LibFiles\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_impl_opengl3.cpp">
+    <ClCompile Include="src\LibFiles\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_tables.cpp">
+    <ClCompile Include="src\LibFiles\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_widgets.cpp">
+    <ClCompile Include="src\LibFiles\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="src\Shaders\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="boid3D.frag">
+    <None Include="src\Shaders\boid3D.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="boid3D.vert">
+    <None Include="src\Shaders\boid3D.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="cube3D.frag">
+    <None Include="src\Shaders\cube3D.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="cube3D.vert">
+    <None Include="src\Shaders\cube3D.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="SimpleTestFlock.setup">
+    <None Include="src\SetUpFiles\SimpleTestFlock.setup">
       <Filter>Setup Files</Filter>
     </None>
-    <None Include="BigFlock.setup">
+    <None Include="src\SetUpFiles\BigFlock.setup">
       <Filter>Setup Files</Filter>
     </None>
-    <None Include="boid3DPerformance.vert">
+    <None Include="src\Shaders\boid3DPerformance.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="boid3DPerformance.frag">
+    <None Include="src\Shaders\boid3DPerformance.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="CPUFlock.setup">
+    <None Include="src\SetUpFiles\CPUFlock.setup">
       <Filter>Setup Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera3D.h">
+    <ClInclude Include="src\Simulations\Camera3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="helper_math.h">
+    <ClInclude Include="src\Flocking\helper_math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="src\Shaders\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
+    <ClInclude Include="src\Simulations\Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flock.h">
+    <ClInclude Include="src\Flocking\Flock.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Flockvec3Arr.h">
+    <ClInclude Include="src\Flocking\Flockvec3Arr.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Flockvec3ArrFunctions.h">
+    <ClInclude Include="src\Flocking\Flockvec3ArrFunctions.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="mat3.h">
+    <ClInclude Include="src\Flocking\mat3.h">
       <Filter>Cuda</Filter>
     </ClInclude>
-    <ClInclude Include="Quality.h">
+    <ClInclude Include="src\Simulations\Quality.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="Simulation.h">
+    <ClInclude Include="src\Simulations\Simulation.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="Performance.h">
+    <ClInclude Include="src\Simulations\Performance.h">
       <Filter>Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="CPUSimulation.h">
+    <ClInclude Include="src\Simulations\CPUSimulation.h">
       <Filter>Simulations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="Flock.cu">
+    <CudaCompile Include="src\Flocking\Flock.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
-    <CudaCompile Include="Flockvec3Arr.cu">
+    <CudaCompile Include="src\Flocking\Flockvec3Arr.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
-    <CudaCompile Include="Flockvec3ArrFunctions.cu">
+    <CudaCompile Include="src\Flocking\Flockvec3ArrFunctions.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
-    <CudaCompile Include="main.cu">
+    <CudaCompile Include="src\main.cu">
       <Filter>Cuda</Filter>
     </CudaCompile>
   </ItemGroup>

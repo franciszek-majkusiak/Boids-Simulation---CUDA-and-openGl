@@ -1,10 +1,9 @@
 #include "Simulation.h"
-#include <chrono>
 
-class CPUSimulation : Simulation
+class PerformanceSimulation : Simulation
 {
 public:
-	CPUSimulation(std::string simulationString) : Simulation(simulationString)
+	PerformanceSimulation(std::string simulationString) : Simulation(simulationString)
 	{
 	}
 	void Prepare() override
@@ -12,7 +11,9 @@ public:
 		ReadPropertiesFromSetup(SimulationString, grid, flockProperties, poolProperties);
 		camera = Camera3D(glm::vec3(poolProperties.Width / 2, poolProperties.Height / 2, 2 * poolProperties.Depth));
 		cube = Cube(poolProperties.Width, poolProperties.Height, poolProperties.Depth);
-		InitCPU(flock, flockProperties, poolProperties);
+
+		Init(grid, poolProperties);
+		Init(flock, flockProperties, poolProperties);
 
 		glBindVertexArray(VAO_CUBE);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO_CUBE);
@@ -22,12 +23,18 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		vertices = new float[VERTICES_PER_BOID_PERFORMANCE * flockProperties.numOfBoids];
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		size_t size = flockProperties.numOfBoids * VERTICES_PER_BOID_PERFORMANCE * sizeof(float);
+		glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		cudaGraphicsGLRegisterBuffer(&VBO_CUDA, VBO, cudaGraphicsMapFlagsWriteDiscard);
+		cudaGraphicsMapResources(1, &VBO_CUDA, 0);
+		cudaGraphicsResourceGetMappedPointer((void**)&vertices, &size, VBO_CUDA);
 
 		// build and compile shader program
 		// ------------------------------------
-		BoidShader = Shader("boid3DPerformance.vert", "boid3DPerformance.frag");
-		cubeShader = Shader("cube3D.vert", "cube3D.frag");
+		BoidShader = Shader("src/Shaders/boid3DPerformance.vert", "src/Shaders/boid3DPerformance.frag");
+		cubeShader = Shader("src/Shaders/cube3D.vert", "src/Shaders/cube3D.frag");
 	}
 
 	void MainLoop() override
@@ -85,17 +92,20 @@ public:
 
 			if (!isStopped)
 			{
-				auto start = std::chrono::high_resolution_clock::now();
-				StepCPU(flock, flockProperties, poolProperties, deltaTime);
-				auto stop = std::chrono::high_resolution_clock::now();
-				UpdateTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+				cudaEventRecord(start);
+				Step(flock, grid, flockProperties, poolProperties, deltaTime);
+				cudaEventRecord(stop);
+				cudaEventSynchronize(stop);
+				cudaEventElapsedTime(&UpdateTime, start, stop);
 				UpdateTime /= 1000.0f;
-				start = std::chrono::high_resolution_clock::now();
-				DrawBoidsPerformanceCPU(flock, flockProperties, vertices);
-				CreateVerticesTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
-				CreateVerticesTime /= 1000.0f;
+				cudaEventRecord(start);
+				DrawBoidsPerformance(flock, flockProperties, vertices);
+				cudaEventRecord(stop);
+				cudaEventSynchronize(stop);
+				cudaEventElapsedTime(&CreateVerticesTime, start, stop);
 				CreateVerticesTime /= 1000.0f;
 			}
+			
 
 
 			BoidShader.Activate();
@@ -106,9 +116,10 @@ public:
 
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, VERTICES_PER_BOID_PERFORMANCE * flockProperties.numOfBoids * sizeof(float), vertices, GL_STATIC_DRAW);
+
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 			glEnableVertexAttribArray(0);
+
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glDrawArrays(GL_TRIANGLES, 0, 3 * flockProperties.numOfBoids);
 			glBindVertexArray(0);
@@ -174,7 +185,8 @@ public:
 	void CleanUp() override
 	{
 		Simulation::CleanUp();
-		FreeCPU(flock);
-		delete[] vertices;
+		Free(flock);
+		Free(grid);
+		cudaGraphicsUnmapResources(1, &VBO_CUDA, 0);
 	}
 };

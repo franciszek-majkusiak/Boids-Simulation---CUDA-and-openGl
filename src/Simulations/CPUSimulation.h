@@ -1,9 +1,10 @@
 #include "Simulation.h"
+#include <chrono>
 
-class QualitySimulation : Simulation
+class CPUSimulation : Simulation
 {
 public:
-	QualitySimulation(std::string simulationString) : Simulation(simulationString)
+	CPUSimulation(std::string simulationString) : Simulation(simulationString)
 	{
 	}
 	void Prepare() override
@@ -11,9 +12,7 @@ public:
 		ReadPropertiesFromSetup(SimulationString, grid, flockProperties, poolProperties);
 		camera = Camera3D(glm::vec3(poolProperties.Width / 2, poolProperties.Height / 2, 2 * poolProperties.Depth));
 		cube = Cube(poolProperties.Width, poolProperties.Height, poolProperties.Depth);
-
-		Init(grid, poolProperties);
-		Init(flock, flockProperties, poolProperties);
+		InitCPU(flock, flockProperties, poolProperties);
 
 		glBindVertexArray(VAO_CUBE);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO_CUBE);
@@ -23,18 +22,12 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		size_t size = flockProperties.numOfBoids * VERTICES_PER_BOID_QUALITY * sizeof(float);
-		glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		cudaGraphicsGLRegisterBuffer(&VBO_CUDA, VBO, cudaGraphicsMapFlagsWriteDiscard);
-		cudaGraphicsMapResources(1, &VBO_CUDA, 0);
-		cudaGraphicsResourceGetMappedPointer((void**)&vertices, &size, VBO_CUDA);
+		vertices = new float[VERTICES_PER_BOID_PERFORMANCE * flockProperties.numOfBoids];
 
 		// build and compile shader program
 		// ------------------------------------
-		BoidShader = Shader("boid3D.vert", "boid3D.frag");
-		cubeShader = Shader("cube3D.vert", "cube3D.frag");
+		BoidShader = Shader("src/Shaders/boid3DPerformance.vert", "src/Shaders/boid3DPerformance.frag");
+		cubeShader = Shader("src/Shaders/cube3D.vert", "src/Shaders/cube3D.frag");
 	}
 
 	void MainLoop() override
@@ -92,17 +85,15 @@ public:
 
 			if (!isStopped)
 			{
-				cudaEventRecord(start);
-				Step(flock, grid, flockProperties, poolProperties, deltaTime);
-				cudaEventRecord(stop);
-				cudaEventSynchronize(stop);
-				cudaEventElapsedTime(&UpdateTime, start, stop);
+				auto start = std::chrono::high_resolution_clock::now();
+				StepCPU(flock, flockProperties, poolProperties, deltaTime);
+				auto stop = std::chrono::high_resolution_clock::now();
+				UpdateTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
 				UpdateTime /= 1000.0f;
-				cudaEventRecord(start);
-				DrawBoids(flock, flockProperties, vertices);
-				cudaEventRecord(stop);
-				cudaEventSynchronize(stop);
-				cudaEventElapsedTime(&CreateVerticesTime, start, stop);
+				start = std::chrono::high_resolution_clock::now();
+				DrawBoidsPerformanceCPU(flock, flockProperties, vertices);
+				CreateVerticesTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+				CreateVerticesTime /= 1000.0f;
 				CreateVerticesTime /= 1000.0f;
 			}
 
@@ -110,28 +101,16 @@ public:
 			BoidShader.Activate();
 			BoidShader.setMat4("projection", projection);
 			BoidShader.setMat4("view", view);
-			BoidShader.setVec3("viewPos", camera.Position);
-			BoidShader.setVec3("dirLight.direction", 0.0f, -1.0f, 0.0f);
-
-			glm::vec3 dirLightColor = glm::vec3(1.0, 1.0, 1.0);
-			glm::vec3 dirDiffuseColor = dirLightColor * glm::vec3(0.8f);
-			glm::vec3 dirAmbientColor = dirLightColor * glm::vec3(0.1f);
-			BoidShader.setVec3("dirLight.ambient", dirAmbientColor);
-			BoidShader.setVec3("dirLight.diffuse", dirDiffuseColor);
-			BoidShader.setVec3("dirLight.specular", 1.0f, 1.0f, 1.0f);
 			BoidShader.setVec3("color", flockProperties.color.x, flockProperties.color.y, flockProperties.color.z);
 
 
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+			glBufferData(GL_ARRAY_BUFFER, VERTICES_PER_BOID_PERFORMANCE * flockProperties.numOfBoids * sizeof(float), vertices, GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-			glEnableVertexAttribArray(1);
-
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glDrawArrays(GL_TRIANGLES, 0, 18 * flockProperties.numOfBoids);
+			glDrawArrays(GL_TRIANGLES, 0, 3 * flockProperties.numOfBoids);
 			glBindVertexArray(0);
 
 
@@ -146,7 +125,7 @@ public:
 			ImGui::Value("FPS", FPS);
 			ImGui::Value("Frame Time", deltaTime);
 			ImGui::Value("Update Time", UpdateTime);
-			ImGui::Value("Vertices Creation Time", CreateVerticesTime);
+			ImGui::Value("VerticesCreation Time", CreateVerticesTime);
 			style->Colors[ImGuiCol_Text] = ImVec4(flockProperties.color.x, flockProperties.color.y, flockProperties.color.z, 1.0f);
 			ImGui::Value("NumOfBoids", flockProperties.numOfBoids);
 			ImGui::Text("Visability");
@@ -195,8 +174,7 @@ public:
 	void CleanUp() override
 	{
 		Simulation::CleanUp();
-		Free(flock);
-		Free(grid);
-		cudaGraphicsUnmapResources(1, &VBO_CUDA, 0);
+		FreeCPU(flock);
+		delete[] vertices;
 	}
 };

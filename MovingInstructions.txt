@@ -1,0 +1,4 @@
+You can move around the scene using keyboard "WSAD" keys and mouse. To enable mouse cursor press "G". Pressing "G" again changes back to looking around mode.
+To close window press escape.
+
+You can change parameters using sliders in upper left corners. (sometimes if your window loses focus it is no longer possible).

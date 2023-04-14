@@ -42,18 +42,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\fmajk\Documents\Sem5Studia\PGwZO\Boids Project\BoidsFinal\Libraries\include\imgui;C:\Users\fmajk\Documents\Sem5Studia\PGwZO\Boids Project\BoidsFinal\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src;$(SolutionDir)\Libraries\include\imgui;$(SolutionDir)\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glfw3.lib;opengl32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\fmajk\Documents\Sem5Studia\PGwZO\Boids Project\BoidsFinal\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -67,7 +70,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\include\imgui;$(SolutionDir)\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src;$(SolutionDir)\Libraries\include\imgui;$(SolutionDir)\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -82,46 +85,46 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="Flock.cu" />
-    <CudaCompile Include="Flockvec3Arr.cu" />
-    <CudaCompile Include="Flockvec3ArrFunctions.cu" />
-    <CudaCompile Include="main.cu" />
+    <CudaCompile Include="src\Flocking\Flock.cu" />
+    <CudaCompile Include="src\Flocking\Flockvec3Arr.cu" />
+    <CudaCompile Include="src\Flocking\Flockvec3ArrFunctions.cu" />
+    <CudaCompile Include="src\main.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="imgui.cpp" />
-    <ClCompile Include="imgui_demo.cpp" />
-    <ClCompile Include="imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_glfw.cpp" />
-    <ClCompile Include="imgui_impl_opengl3.cpp" />
-    <ClCompile Include="imgui_tables.cpp" />
-    <ClCompile Include="imgui_widgets.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="src\LibFiles\glad.c" />
+    <ClCompile Include="src\LibFiles\imgui.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_demo.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_draw.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_tables.cpp" />
+    <ClCompile Include="src\LibFiles\imgui_widgets.cpp" />
+    <ClCompile Include="src\Shaders\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="boid3D.frag" />
-    <None Include="boid3D.vert" />
-    <None Include="boid3DPerformance.frag" />
-    <None Include="boid3DPerformance.vert" />
-    <None Include="CPUFlock.setup" />
-    <None Include="cube3D.frag" />
-    <None Include="cube3D.vert" />
-    <None Include="BigFlock.setup" />
-    <None Include="SimpleTestFlock.setup" />
+    <None Include="src\Shaders\boid3D.frag" />
+    <None Include="src\Shaders\boid3D.vert" />
+    <None Include="src\Shaders\boid3DPerformance.frag" />
+    <None Include="src\Shaders\boid3DPerformance.vert" />
+    <None Include="src\SetUpFiles\CPUFlock.setup" />
+    <None Include="src\Shaders\cube3D.frag" />
+    <None Include="src\Shaders\cube3D.vert" />
+    <None Include="src\SetUpFiles\BigFlock.setup" />
+    <None Include="src\SetUpFiles\SimpleTestFlock.setup" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera3D.h" />
-    <ClInclude Include="CPUSimulation.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="Flock.h" />
-    <ClInclude Include="Flockvec3Arr.h" />
-    <ClInclude Include="Flockvec3ArrFunctions.h" />
-    <ClInclude Include="helper_math.h" />
-    <ClInclude Include="mat3.h" />
-    <ClInclude Include="Performance.h" />
-    <ClInclude Include="Quality.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Simulation.h" />
+    <ClInclude Include="src\Simulations\Camera3D.h" />
+    <ClInclude Include="src\Simulations\CPUSimulation.h" />
+    <ClInclude Include="src\Simulations\Cube.h" />
+    <ClInclude Include="src\Flocking\Flock.h" />
+    <ClInclude Include="src\Flocking\Flockvec3Arr.h" />
+    <ClInclude Include="src\Flocking\Flockvec3ArrFunctions.h" />
+    <ClInclude Include="src\Flocking\helper_math.h" />
+    <ClInclude Include="src\Flocking\mat3.h" />
+    <ClInclude Include="src\Simulations\Performance.h" />
+    <ClInclude Include="src\Simulations\Quality.h" />
+    <ClInclude Include="src\Shaders\Shader.h" />
+    <ClInclude Include="src\Simulations\Simulation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

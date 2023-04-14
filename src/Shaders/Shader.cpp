@@ -15,6 +15,8 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
+	fprintf(stderr, "Cannot open file %s\n", filename);
+	//exit(EXIT_FAILURE);
 	throw(errno);
 }
 
